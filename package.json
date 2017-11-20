@@ -1,8 +1,9 @@
 {
   "name": "create-react-file",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Use comman line to create component or something else",
   "main": "index.js",
+  "bin": "index.js",
   "scripts": {
     "test": "node ./index Test"
   },
