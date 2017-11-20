@@ -17,7 +17,7 @@ class ${compName} extends Component {
     });
 
     return (
-      <div className={cls} {...others}>
+      <div className={cls}${page ? '' : ' {...others}'}>
         ${page? name : '{ children }'}
       </div>
     );
