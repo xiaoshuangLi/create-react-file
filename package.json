@@ -1,0 +1,23 @@
+{
+  "name": "create-react-file",
+  "version": "1.0.0",
+  "description": "Use comman line to create component or something else",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./index Test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaoshuangLi/create-react-file.git"
+  },
+  "author": "Xiaoshuang Li",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xiaoshuangLi/create-react-file/issues"
+  },
+  "homepage": "https://github.com/xiaoshuangLi/create-react-file#readme",
+  "dependencies": {
+    "change-case": "^3.0.1",
+    "commander": "^2.11.0"
+  }
+}

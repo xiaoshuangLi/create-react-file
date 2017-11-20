@@ -1,0 +1,35 @@
+module.exports = `
+@import "frontend/css/func.scss";
+
+.components-raven-render {
+  top: 0;
+  left: 0;
+  padding: 10px;
+
+  @extend %fixed;
+  @extend %fwhite;
+  @extend %pnone;
+
+  .raven-eye {
+    @extend %row;
+
+    > * {
+      @extend %left;
+    }
+
+    & + .raven-eye {
+      margin-top: 5px;
+    }
+
+    .title {
+      &:after {
+        content:  ':';
+      }
+
+      & + .desc {
+        margin-left: 5px;
+      }
+    }
+  }
+}
+`;
