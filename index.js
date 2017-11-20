@@ -104,11 +104,10 @@ function run(name = '', parentName = '', cmd = {}) {
 };
 
 program
-  .name('create-file')
+  .name('create-react-file')
   .arguments('<name> [parentName]')
   .option('-l, --low', 'React < 16.0 whitout PropTypes Or React-Router < 4.0')
-  .option('-m, --modules', 'create page modules')
-  .option('-c, --component', 'create component')
+  .option('-m, --modules', 'create modules')
   .option('-p, --page', 'create page component')
   .option('-r, --redux', 'create redux part')
   .option('-s, --signle', 'only create Component.jsx')
