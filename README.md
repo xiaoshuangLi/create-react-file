@@ -17,7 +17,7 @@ Create folder `./Component` and file `Component.jsx`, `index.js`, `Component.css
 
 #### Component.jsx
 
-```es6
+```jsx
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
