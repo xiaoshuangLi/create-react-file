@@ -4,7 +4,7 @@ Use comman line to create component or something else
 ## Installation
 
 ```sh
-npm install anywhere -g
+npm install create-react-file -g
 ```
 
 ## Execution
