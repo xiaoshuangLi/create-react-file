@@ -6,6 +6,7 @@ const Iconfont = require('./Iconfont');
 const Loading = require('./Loading');
 const Raven = require('./Raven');
 const RelativeRouter = require('./RelativeRouter');
+const AntdForm = require('./AntdForm');
 
 module.exports = {
   Normal,
@@ -16,4 +17,5 @@ module.exports = {
   Loading,
   Raven,
   RelativeRouter,
+  AntdForm,
 };

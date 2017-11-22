@@ -52,6 +52,27 @@ function createComp(opts = {}) {
   wirte(comp, compTemp(opts));
   wirte(style, styleTemp(opts));
   wirte(index, indexTemp(opts));
+
+  const others = Object.assign({}, res);
+
+  delete others.compTemp;
+  delete others.indexTemp;
+  delete others.styleTemp;
+
+  const keys = Object.keys(others);
+
+  if (!keys.length) {
+    return null;
+  }
+
+  keys.forEach((key) => {
+    const value = others[key];
+
+    const keyPath = path.resolve(dir, `${key}.jsx`);
+    const keyTemp = typeof value === 'function' ? value(opts) : value;
+
+    wirte(keyPath, keyTemp);
+  });
 }
 
 function createModule(opts) {
