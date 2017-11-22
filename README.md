@@ -78,4 +78,13 @@ $ create-react-file --help
     -h, --help     output usage information
 ```
 
+## Others
+
+Little tip with [oh my zsh](http://ohmyz.sh).
+Changing `.zshrc` like this makes the tool be more convenient.
+
+```
+alias cf="create-react-file"
+alias cfp="create-react-file -p"
+```
 
