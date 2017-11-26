@@ -27,6 +27,7 @@ class AntdForm {
     this.onFieldsChange = this.onFieldsChange.bind(this);
     this.onValuesChange = this.onValuesChange.bind(this);
     this.mapPropsToFields = this.mapPropsToFields.bind(this);
+    this.createDetail = this.createDetail.bind(this);
   }
 
   setProps(props, force) {
@@ -71,9 +72,9 @@ class AntdForm {
     });
   }
 
-  mapPropsToFields(props) {
-    const { values = {}, fields = {} } = this.state;
-    const { valid = ({ detail = {} } = {}) => detail } = this.props;
+  createDetail(obj = {}) {
+    obj = Object.assign({}, obj, this.state);
+    const { values = {}, fields = {} } = obj;
 
     const detail = Object.keys(values).reduce((res, key) => {
       const field = fields[key] || {};
@@ -94,6 +95,15 @@ class AntdForm {
 
       return res;
     }, detail);
+
+    return detail;
+  }
+
+  mapPropsToFields(props) {
+    const { values = {}, fields = {} } = this.state;
+    const { valid = ({ detail = {} } = {}) => detail } = this.props;
+
+    const detail = this.createDetail();
 
     return valid({ values, fields, detail });
   }

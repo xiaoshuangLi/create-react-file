@@ -94,7 +94,11 @@ class BaseForm extends Component {
     }
 
     if (comp) {
-      return comp.apply(this, [opts]);
+      const res = Object.assign({}, opts, {
+        disabled: this.baseGetDisabled(opts),
+      });
+
+      return comp.apply(this, [res]);
     }
 
     return (
@@ -103,31 +107,37 @@ class BaseForm extends Component {
   }
 
   baseRenderDefaultInput(opts = {}, DefaultComp) {
-    const { title = '', name, comp, newComp, render, className, required, itemOpts = {}, fieldOpts = {}, ...others } = opts;
+    const { title = '', name, comp, newComp, render, className, required, itemRender, itemOpts = {}, fieldOpts = {}, ...others } = opts;
     const { form = {} } = this.props;
     const { getFieldDecorator } = form;
     const rules = getRules(opts);
 
     const Comp = this.baseRenderComp(opts, DefaultComp);
 
+    const itemContent = itemRender ?
+      itemRender.apply(this, [opts]) :
+      getFieldDecorator(name, { rules, ...fieldOpts })(Comp);
+
     return (
       <Item className={className} label={title} {...others} {...itemOpts}>
-        { getFieldDecorator(name, { rules, ...fieldOpts })(Comp) }
+        { itemContent }
       </Item>
     );
   }
 
   baseRender(DefaultComp = Input) {
     return (inputs = []) => {
+      const { form } = this.props;
       const { baseRenderDefaultInput } = this;
 
       inputs = toArray(inputs);
 
       return inputs.map((item, i) => {
-        const { render = baseRenderDefaultInput, show, colOpts = {} } = item;
-        const renderComp = render(item, DefaultComp);
+        const { render = baseRenderDefaultInput, show, name, colOpts = {} } = item;
+        const renderComp = render.apply(this, [item, DefaultComp]);
 
         if (show && !show.apply(this)) {
+          form.getFieldDecorator(name, {})(<Span />);
           return null;
         }
 
