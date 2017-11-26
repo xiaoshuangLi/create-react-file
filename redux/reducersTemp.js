@@ -4,7 +4,7 @@ const { createReduxName, createModuleName } = common;
 
 const create = ({ reduxName = '', moduleName } = {}) => `
 import { ${reduxName}_ASSIGN_STATE, ${reduxName}_SET_STATE } from '../constants';
-import { createReducer } from '../../func';
+import { createReducer } from '../func';
 
 const initialState = {};
 
