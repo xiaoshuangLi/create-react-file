@@ -8,6 +8,16 @@ ${low ? '' : `import PropTypes from 'prop-types';`}
 import classnames from 'classnames';
 
 class ${compName} extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  ${ page ? '' : 'static propTypes = {};' }
+
+  ${ page ? '' : 'static defaultProps = {};' }
+
+  state = {};
+
   render() {
     const { className${page ? '' : ', children, ...others'} } = this.props;
 
@@ -23,9 +33,6 @@ class ${compName} extends Component {
     );
   }
 }
-
-${ page ? '' : `${compName}.propTypes = {};`}
-${ page ? '' : `${compName}.defaultProps = {};`}
 
 export default ${compName};
 `;

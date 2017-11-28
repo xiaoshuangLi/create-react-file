@@ -1,4 +1,4 @@
-module.exports = `
+module.exports = opts => `
 $iconfont-url: '//at.alicdn.com/t/font_8gxlw58ogzy6i529';
 
 @font-face {

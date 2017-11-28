@@ -23,6 +23,16 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 class Component extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  static propTypes = {};
+
+  static defaultProps = {};
+
+  state = {};
+
   render() {
     const { className, children, ...others } = this.props;
 
@@ -38,9 +48,6 @@ class Component extends Component {
     );
   }
 }
-
-Component.propTypes = {};
-Component.defaultProps = {};
 
 export default Component;
 ```
@@ -78,7 +85,11 @@ $ create-react-file --help
     -h, --help     output usage information
 ```
 
-## Others
+## For arrow function in Class
+
+Arrow function maybe not so good as we thought.You should read [this](https://medium.com/@charpeni/arrow-functions-in-class-properties-might-not-be-as-great-as-we-think-3b3551c440b1) before use it.
+
+## Simply command-line
 
 Little tip with [oh my zsh](http://ohmyz.sh).
 Changing `.zshrc` like this makes the tool be more convenient.

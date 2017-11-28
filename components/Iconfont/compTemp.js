@@ -4,6 +4,16 @@ ${low ? '' : `import PropTypes from 'prop-types';`}
 import classnames from 'classnames';
 
 class Iconfont extends Component {
+  static propTypes = {
+    type: PropTypes.string,
+    theme: PropTypes.oneOf(['default', 'info', 'success', 'warning', 'error']),
+  };
+
+  static defaultProps = {
+    type: '',
+    theme: 'default',
+  };
+
   render() {
     const { type, theme, className, ...others } = this.props;
     const cls = classnames({
@@ -18,16 +28,6 @@ class Iconfont extends Component {
     );
   }
 }
-
-Iconfont.propTypes = {
-  type: PropTypes.string,
-  theme: PropTypes.oneOf(['default', 'info', 'success', 'warning', 'error']),
-};
-
-Iconfont.defaultProps = {
-  type: '',
-  theme: 'default',
-};
 
 export default Iconfont;
 `;
