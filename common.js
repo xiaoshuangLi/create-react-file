@@ -25,7 +25,12 @@ const createClassName = (opts = {}) => {
 };
 
 const clearLine = (code = '') => {
-  return code.replace(/\n{3,}/g, '\n\n').replace(/^\n/, '');
+  const res = code
+    .replace(/\n+(\s{1,})\n/g, '\n\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .replace(/^\n/, '');
+
+  return res;
 };
 
 module.exports = {
