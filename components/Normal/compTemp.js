@@ -4,7 +4,7 @@ const { createComponentName, createClassName } = common;
 
 const create = ({compName = '', className = '', low = false, page = false, name = '' } = {}) => `
 import React, { Component${low ? ', PropTypes' : ''} } from 'react';
-${low ? '' : `import PropTypes from 'prop-types';`}
+${low ? 'DELETE_LINE' : `import PropTypes from 'prop-types';`}
 import classnames from 'classnames';
 
 class ${compName} extends Component {
