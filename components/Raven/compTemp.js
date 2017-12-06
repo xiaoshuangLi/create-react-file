@@ -1,4 +1,4 @@
-module.exports = `
+module.exports = opts => `
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import classnames from 'classnames';

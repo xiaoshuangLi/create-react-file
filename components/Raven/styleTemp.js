@@ -1,4 +1,4 @@
-module.exports = `
+module.exports = opts => `
 @import "~css/func/index";
 
 .components-raven-render {
