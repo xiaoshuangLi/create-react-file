@@ -109,6 +109,10 @@ In webpack@^2.0.0:
   console.log(Comp); // { default: class Comp { ... } }
 ```
 
+## For sass awesome ability
+
+If you're interested in Sass.You should read [this](https://gist.github.com/jslegers/9805919) something diffenent and awesome. 
+
 ## Simply command-line
 
 Little tip with [oh my zsh](http://ohmyz.sh).
@@ -118,4 +122,3 @@ Changing `.zshrc` like this makes the tool be more convenient.
 alias cf="create-react-file"
 alias cfp="create-react-file -p"
 ```
-
