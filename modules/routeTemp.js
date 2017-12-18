@@ -19,7 +19,7 @@ const route = {
         require.ensure([], (require) => {
           const Comp = require('./pages/One');
           cb(null, Comp.default || Comp);
-        })
+        });
       },
     },
   ],
