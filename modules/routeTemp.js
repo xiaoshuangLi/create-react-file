@@ -16,9 +16,10 @@ const route = {
     {
       path: 'one',
       getComponent(location, cb) {
-        import('./pages/One').then((Comp) => {
+        require.ensure([], (require) => {
+          const Comp = require('./pages/One');
           cb(null, Comp.default || Comp);
-        });
+        })
       },
     },
   ],
