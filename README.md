@@ -93,10 +93,11 @@ Arrow function maybe not so good as we thought.You should read [this](https://me
 
 Require will get different result with different version webpack.
 
-In webpack@^1.0.0, require('./Comp') will get ```js class Comp ```;
-In webpack@^2.0.0, require('./Comp') will get ```js { default: Comp } ```;
+In webpack@^1.0.0, require('./Comp') will get ```class Comp ```;
 
-Maybe ```js import('./Comp') ``` is better.
+In webpack@^2.0.0, require('./Comp') will get ```{ default: Comp } ```;
+
+Maybe ```import('./Comp') ``` is better.
 
 ## Simply command-line
 
