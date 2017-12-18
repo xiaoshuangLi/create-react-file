@@ -89,6 +89,15 @@ $ create-react-file --help
 
 Arrow function maybe not so good as we thought.You should read [this](https://medium.com/@charpeni/arrow-functions-in-class-properties-might-not-be-as-great-as-we-think-3b3551c440b1) before use it.
 
+## For require in webpack
+
+Require will get different result with different version webpack.
+
+In webpack@^1.0.0, require('./Comp') will get ```js class Comp ```;
+In webpack@^2.0.0, require('./Comp') will get ```js { default: Comp } ```;
+
+Maybe ```js import('./Comp') ``` is better.
+
 ## Simply command-line
 
 Little tip with [oh my zsh](http://ohmyz.sh).
