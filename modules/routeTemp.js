@@ -3,18 +3,21 @@ const common = require('../common');
 const { createModuleName } = common;
 
 const createLower = ({ moduleName } = {}) => `
+import App from 'js/components/App';
+import PageDefault from './pages/PageDefault';
+
 const route = {
   path: '${moduleName}',
-  component: require('js/components/App'),
+  component: App,
   indexRoute: {
-    component: require('./pages/PageDefault'),
+    component: PageDefault,
   },
   childRoutes: [
     {
       path: 'one',
       getComponent(location, cb) {
-        require.ensure([], (require) => {
-          cb(null, require('./pages/PageOne'));
+        import('./pages/One').then((Comp) => {
+          cb(null, Comp.default || Comp);
         });
       },
     },
