@@ -81,7 +81,7 @@ $ create-react-file --help
     -m, --modules  create modules
     -p, --page     create page component
     -r, --redux    create redux part
-    -s, --signle   only create Component.jsx
+    -s, --single   only create Component.jsx
     -h, --help     output usage information
 ```
 

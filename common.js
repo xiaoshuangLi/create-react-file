@@ -19,7 +19,11 @@ const createComponentName = (opts = {}) => {
 };
 
 const createClassName = (opts = {}) => {
-  const { page = false, name = '', parentName = '' } = opts;
+  const { page = false, single = false, name = '', parentName = '' } = opts;
+
+  if (single) {
+    return changeCase.paramCase(name);
+  }
 
   return changeCase.paramCase(`${page ? 'pages' : 'components'}-${parentName}-${name}-render`);
 };

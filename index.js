@@ -26,7 +26,7 @@ function getOpts(name = '', parentName = '', cmd = {}) {
 
 function createComp(opts = {}) {
   const name = createComponentName(opts);
-  const { signle } = opts;
+  const { single } = opts;
 
   const Comp = components[name];
   const res = Object.assign({}, Normal, Comp);
@@ -35,7 +35,7 @@ function createComp(opts = {}) {
   let dir;
   let comp;
 
-  if (signle) {
+  if (single) {
     dir = path.resolve();
     comp = path.resolve(dir, `${name}.jsx`);
 
@@ -131,6 +131,6 @@ program
   .option('-m, --modules', 'create modules')
   .option('-p, --page', 'create page component')
   .option('-r, --redux', 'create redux part')
-  .option('-s, --signle', 'only create Component.jsx')
+  .option('-s, --single', 'only create Component.jsx')
   .action(run)
   .parse(process.argv); 
