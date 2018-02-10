@@ -77,7 +77,7 @@ $ create-react-file --help
 
   Options:
 
-    -l, --low      React < 16.0 whitout PropTypes Or React-Router < 4.0
+    -l, --low      React < 16.0 without PropTypes Or React-Router < 4.0
     -m, --modules  create modules
     -p, --page     create page component
     -r, --redux    create redux part
