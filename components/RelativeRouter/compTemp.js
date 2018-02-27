@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 
 import App from 'js/components/App';
 
-const createChildrenRoute = (basePath = '', routes = []) => {
+const createChildrenRoutes = (basePath = '', routes = []) => {
   const items = routes.map((route = {}, i) => {
     const { path = '', children, ...others } = route;
 
@@ -20,19 +20,26 @@ const createChildrenRoute = (basePath = '', routes = []) => {
 
 class RelativeRouter extends Component {
   render() {
-    const { path = '', routes = [], ...others } = this.props;
+    const {
+      path = '',
+      routes = [],
+      location = {},
+      ...others
+    } = this.props;
 
-    const items = createChildrenRoute(path, routes);
+    const items = createChildrenRoutes(path, routes);
 
     return (
       <App {...others}>
-        { items }
+        <Switch location={location}>
+          { items }
+        </Switch>
       </App>
     );
   }
 }
 
-RelativeRouter.createChildrenRoute = createChildrenRoute;
+RelativeRouter.createChildrenRoutes = createChildrenRoutes;
 
 export default RelativeRouter;
 `;
