@@ -4,9 +4,13 @@ import { render } from 'react-dom';
 import classnames from 'classnames';
 
 let div;
-const data = {};
+const baseData = {};
 
 const create = () => {
+  if (typeof document === 'undefined') {
+    return;
+  }
+
   if (!div) {
     div = document.createElement('div');
     div.classList.add('north');
@@ -47,21 +51,21 @@ class Raven extends Component {
 Raven.watch = (obj = {}) => {
   create();
 
-  Object.assign(data, obj);
+  Object.assign(baseData, obj);
 
-  render(<Raven data={data} />, div);
+  div && render(<Raven data={baseData} />, div);
 };
 
 Raven.shadow = (obj = {}) => {
   create();
 
   Object.keys(obj).forEach((key) => {
-    if (key in data) {
-      delete data[key];
+    if (key in baseData) {
+      delete baseData[key];
     }
   });
 
-  render(<Raven data={data} />, div);
+  div && render(<Raven data={baseData} />, div);
 };
 
 export default Raven;

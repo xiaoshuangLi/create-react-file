@@ -34,24 +34,20 @@ import React from 'react';
 import Bundle from 'js/components/Bundle';
 import RelativeRouter from 'js/components/RelativeRouter';
 
-const createBundle = path => (props) => {
-  const load = () => import(\`\${path}\`);
-
-  return (
-    <Bundle once load={load}>
-      {Comp => <Comp {...props} />}
-    </Bundle>
-  );
-};
+const createBundle = load => props => (
+  <Bundle once load={load}>
+    {Comp => <Comp {...props} />}
+  </Bundle>
+);
 
 const routes = [
   {
     exact: true,
-    component: createBundle('./pages/PageDefault'),
+    component: createBundle(() => import('./pages/PageDefault')),
   },
   {
-    path: '/one',
-    component: createBundle('./pages/PageOne'),
+    path: '/bad',
+    component: createBundle(() => import('./pages/PageOne')),
   },
 ];
 
