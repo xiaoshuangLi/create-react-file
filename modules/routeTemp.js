@@ -31,14 +31,8 @@ export default route;
 const create = ({ moduleName } = {}) => `
 import React from 'react';
 
-import Bundle from 'js/components/Bundle';
+import { createBundle } from 'js/components/Bundle';
 import RelativeRouter from 'js/components/RelativeRouter';
-
-const createBundle = load => props => (
-  <Bundle once load={load}>
-    {Comp => <Comp {...props} />}
-  </Bundle>
-);
 
 const routes = [
   {

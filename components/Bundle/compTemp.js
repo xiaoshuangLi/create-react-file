@@ -1,5 +1,6 @@
 module.exports = opts => `
-import { Component } from 'react';
+import React, { Component } from 'react';
+import qs from 'qs';
 
 const loadedBundle = new WeakMap();
 
@@ -41,5 +42,26 @@ class Bundle extends Component {
   }
 }
 
+
+const qsOpts = { ignoreQueryPrefix: true };
+
+const createBundle = load => (props = {}) => {
+  const { location = {} } = props;
+  const { search = '' } = location;
+
+  const query = qs.parse(search, qsOpts);
+
+  const renderComp = Comp => (
+    <Comp query={query} {...props} />
+  );
+
+  return (
+    <Bundle once load={load}>
+      { renderComp }
+    </Bundle>
+  );
+};
+
+export { createBundle };
 export default Bundle;
 `;
