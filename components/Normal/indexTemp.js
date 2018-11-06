@@ -4,9 +4,8 @@ const { createComponentName } = common;
 
 const create = ({ compName } = {}) => `
 import './${compName}.scss';
-import ${compName} from './${compName}';
 
-export default ${compName};
+export * from './${compName}';
 `;
 
 module.exports = (opts) => {

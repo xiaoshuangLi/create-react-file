@@ -45,15 +45,33 @@ class Bundle extends Component {
 
 const qsOpts = { ignoreQueryPrefix: true };
 
-const createBundle = load => (props = {}) => {
-  const { location = {} } = props;
+const getLocation = (props = {}) => {
+  const { location } = props;
+
+  if (location !== undefined) {
+    return location;
+  }
+
+  if (typeof window === 'undefined') {
+    return {};
+  }
+
+  return window.location;
+}
+
+const renderWithQuery = (Comp, props = {}) => {
+  const location = getLocation();
   const { search = '' } = location;
 
   const query = qs.parse(search, qsOpts);
 
-  const renderComp = Comp => (
+  return (
     <Comp query={query} {...props} />
   );
+}
+
+const createBundle = load => (props = {}) => {
+  const renderComp = Comp => renderWithQuery(Comp, props);
 
   return (
     <Bundle once load={load}>
@@ -62,6 +80,6 @@ const createBundle = load => (props = {}) => {
   );
 };
 
-export { createBundle };
+export { createBundle, renderWithQuery };
 export default Bundle;
 `;
