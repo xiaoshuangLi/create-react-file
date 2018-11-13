@@ -6,6 +6,7 @@ const create = ({ compName } = {}) => `
 import './${compName}.scss';
 
 export * from './${compName}';
+export { default } from './${compName}';
 `;
 
 module.exports = (opts) => {
