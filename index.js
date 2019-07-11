@@ -128,6 +128,7 @@ program
   .name('create-react-file')
   .arguments('<name> [parentName]')
   .option('-l, --low', 'React < 16.0 without PropTypes Or React-Router < 4.0')
+  .option('-f, --function', 'create function component')
   .option('-m, --modules', 'create modules')
   .option('-p, --page', 'create page component')
   .option('-r, --redux', 'create redux part')

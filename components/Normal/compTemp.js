@@ -2,7 +2,58 @@ const common = require('../../common');
 
 const { createComponentName, createClassName } = common;
 
-const create = ({compName = '', className = '', low = false, page = false, name = '' } = {}) => `
+const create = (opts = {}) => {
+  const {
+    compName = '',
+    className = '',
+    name = '',
+    low = false,
+    page = false,
+    function: isFunction = false,
+  } = opts;
+
+  if (isFunction) {
+    return `
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+  useImperativeHandle,
+  useContext,
+} from 'react';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
+
+const ${compName} = React.forwardRef((props = {}, ref) => {
+  const {
+    className,
+    children,
+    ...others
+  } = props;
+
+  const cls = classnames({
+    '${className}': true,
+    [className]: !!className,
+  });
+
+  return (
+    <div className={cls} ref={ref} {...others}>
+      ${page? name : '{ children }'}
+    </div>
+  );
+});
+
+${compName}.propTypes = {};
+
+${compName}.defaultProps = {};
+
+export default ${compName};
+`;
+  }
+
+  return `
 import React, { Component${low ? ', PropTypes' : ''} } from 'react';
 ${low ? 'DELETE_LINE' : `import PropTypes from 'prop-types';`}
 import classnames from 'classnames';
@@ -36,6 +87,7 @@ class ${compName} extends Component {
 
 export default ${compName};
 `;
+};
 
 module.exports = (opts) => {
   const compName = createComponentName(opts);
