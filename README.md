@@ -77,12 +77,13 @@ $ create-react-file --help
 
   Options:
 
-    -l, --low      React < 16.0 without PropTypes Or React-Router < 4.0
-    -m, --modules  create modules
-    -p, --page     create page component
-    -r, --redux    create redux part
-    -s, --single   only create Component.jsx
-    -h, --help     output usage information
+    -l, --low       React < 16.0 without PropTypes Or React-Router < 4.0
+    -p, --function  create function component
+    -p, --page      create page component
+    -m, --modules   create modules
+    -r, --redux     create redux part
+    -s, --single    only create Component.jsx
+    -h, --help      output usage information
 ```
 
 ## For arrow function in Class
