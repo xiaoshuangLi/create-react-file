@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/xiaoshuangLi/create-react-file/issues"
   },
-  "homepage": "https://github.com/xiaoshuangLi/create-react-file#readme",
+  "homepage": "https://xiaoshuangli.github.io/web-just-for-fun/",
   "dependencies": {
     "change-case": "^3.0.1",
     "commander": "^2.11.0"
