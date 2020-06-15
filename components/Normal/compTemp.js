@@ -39,7 +39,7 @@ const ${compName} = React.forwardRef((props = {}, ref) => {
   });
 
   return (
-    <div className={cls} ref={ref} {...others}>
+    <div ref={ref} className={cls} {...others}>
       ${page? name : '{ children }'}
     </div>
   );
