@@ -2,6 +2,16 @@ const common = require('../../common');
 
 const { createComponentName, createClassName } = common;
 
+const hooksCode = `
+import {
+  useStableRef,
+  usePrevious,
+  useEventCallback,
+  useDebounceCallback,
+  useThrottleCallback,
+} from './hooks';
+`;
+
 const create = (opts = {}) => {
   const {
     compName = '',
@@ -9,6 +19,7 @@ const create = (opts = {}) => {
     name = '',
     low = false,
     page = false,
+    hooks: isHooks = false,
     function: isFunction = false,
   } = opts;
 
@@ -16,17 +27,23 @@ const create = (opts = {}) => {
     return `
 import React, {
   useRef,
+  useMemo,
   useState,
   useEffect,
-  useMemo,
+  useReducer,
   useCallback,
+  useLayoutEffect,
   useImperativeHandle,
   useContext,
 } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
+${ isHooks ? hooksCode : 'DELETE_LINE' }
+${ isHooks ? '' : 'DELETE_LINE' }
 const ${compName} = React.forwardRef((props = {}, ref) => {
+  ${ isHooks ? 'ref = useStableRef(ref);' : 'DELETE_LINE' }
+  ${ isHooks ? '' : 'DELETE_LINE' }
   const {
     className,
     children,

@@ -26,16 +26,20 @@ function getOpts(name = '', parentName = '', cmd = {}) {
 
 function createComp(opts = {}) {
   const name = createComponentName(opts);
-  const { single } = opts;
+  const {
+    hooks: isHooks,
+    single: isSingle,
+    function: isFunction,
+  } = opts;
 
   const Comp = components[name];
   const res = Object.assign({}, Normal, Comp);
-  const { compTemp, indexTemp, styleTemp } = res;
+  const { indexTemp, compTemp, hooksTemp, styleTemp } = res;
 
   let dir;
   let comp;
 
-  if (single) {
+  if (isSingle) {
     dir = path.resolve();
     comp = path.resolve(dir, `${name}.jsx`);
 
@@ -53,10 +57,17 @@ function createComp(opts = {}) {
   wirte(style, styleTemp(opts));
   wirte(index, indexTemp(opts));
 
+  if (isHooks && isFunction) {
+    const hooks = path.resolve(dir, `hooks.js`);
+
+    wirte(hooks, hooksTemp(opts));
+  }
+
   const others = Object.assign({}, res);
 
-  delete others.compTemp;
   delete others.indexTemp;
+  delete others.compTemp;
+  delete others.hooksTemp;
   delete others.styleTemp;
 
   const keys = Object.keys(others);
@@ -132,6 +143,7 @@ program
   .option('-m, --modules', 'create modules')
   .option('-p, --page', 'create page component')
   .option('-r, --redux', 'create redux part')
+  .option('-h, --hooks', 'create hooks.js')
   .option('-s, --single', 'only create Component.jsx')
   .action(run)
   .parse(process.argv); 

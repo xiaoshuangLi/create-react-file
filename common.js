@@ -30,12 +30,10 @@ const createClassName = (opts = {}) => {
 
 const clearLine = (code = '') => {
   const res = code
-    .replace(/\n+(DELETE_LINE{1,})\n/g, '\n')
-    .replace(/DELETE_LINE/, '')
-    .replace(/\n+(\s{1,})\n/g, '\n\n')
-    .replace(/\n+(\s{1,})\n/g, '\n\n')
-    .replace(/\n{3,}/g, '\n\n')
-    .replace(/^\n/, '');
+    .replace(/^\n/g, '')
+    .replace(/^([^(\n)]*DELETE_LINE[^(\n)]*)/g, '')
+    .replace(/\n([^(\n)]*DELETE_LINE[^(\n)]*)/g, '')
+    .replace(/\n+[\s\n]*\n/g, '\n\n');
 
   return res;
 };
