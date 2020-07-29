@@ -1,17 +1,20 @@
 #!/usr/bin/env node
+'use strict';
 
 const fs = require("fs");
 const path = require("path");
 const changeCase = require("change-case");
 const program = require("commander");
 
-const components = require('./components');
-const modules = require('./modules');
-const redux = require('./redux');
-const common = require('./common');
+const BASR_PATH = path.resolve(__dirname, './Component');
+const common = require(path.resolve(__dirname, './common'));
 
-const { createComponentName, createClassName, createModuleName, clearLine } = common;
-const { Normal } = components;
+const {
+  clearLine,
+  createClassName,
+  createModuleName,
+  createComponentName,
+} = common;
 
 function wirte(path, code) {
   fs.writeSync(fs.openSync(path, "w"), clearLine(code));
@@ -24,7 +27,8 @@ function getOpts(name = '', parentName = '', cmd = {}) {
   }, cmd);
 }
 
-function createComp(opts = {}) {
+function createComponent(opts = {}) {
+  const fileNames = fs.readdirSync(BASR_PATH);
   const name = createComponentName(opts);
   const {
     hooks: isHooks,
@@ -32,118 +36,72 @@ function createComp(opts = {}) {
     function: isFunction,
   } = opts;
 
-  const Comp = components[name];
-  const res = Object.assign({}, Normal, Comp);
-  const { indexTemp, compTemp, hooksTemp, styleTemp } = res;
-
-  let dir;
-  let comp;
+  const dir = isSingle ? path.resolve() : path.resolve(name);
 
   if (isSingle) {
-    dir = path.resolve();
-    comp = path.resolve(dir, `${name}.jsx`);
+    const fn = require(path.resolve(BASR_PATH, 'component.template.js'));
+    const code = fn(opts);
+    const filePath = path.resolve(dir, `${name}.jsx`);
 
-    return wirte(comp, compTemp(opts));
+    wirte(filePath, code);
+    return;
   }
-
-  dir = path.resolve(name);
-  comp = path.resolve(dir, `${name}.jsx`);
-  const style = path.resolve(dir, `${name}.scss`);
-  const index = path.resolve(dir, `index.js`);
 
   fs.mkdirSync(`./${name}`);
 
-  wirte(comp, compTemp(opts));
-  wirte(style, styleTemp(opts));
-  wirte(index, indexTemp(opts));
+  fileNames.forEach((fileName) => {
+    const fn = require(path.resolve(BASR_PATH, fileName));
 
-  if (isHooks && isFunction) {
-    const hooks = path.resolve(dir, `hooks.js`);
+    switch (fileName) {
+      case 'component.template.js': {
+        const code = fn(opts);
+        const filePath = path.resolve(dir, `${name}.jsx`);
 
-    wirte(hooks, hooksTemp(opts));
-  }
+        wirte(filePath, code);
 
-  const others = Object.assign({}, res);
+        break;
+      }
+      case 'style.template.js': {
+        const code = fn(opts);
+        const filePath = path.resolve(dir, `${name}.scss`);
 
-  delete others.indexTemp;
-  delete others.compTemp;
-  delete others.hooksTemp;
-  delete others.styleTemp;
+        wirte(filePath, code);
 
-  const keys = Object.keys(others);
+        break;
+      }
+      case 'hooks.js': {
+        if (isHooks && isFunction) {
+          const code = fn(opts);
+          const filePath = path.resolve(dir, fileName);
 
-  if (!keys.length) {
-    return null;
-  }
+          wirte(filePath, code);
+        }
 
-  keys.forEach((key) => {
-    const value = others[key];
+        break;
+      }
+      default: {
+        const code = fn(opts);
+        const filePath = path.resolve(dir, fileName);
 
-    const keyPath = path.resolve(dir, `${key}.jsx`);
-    const keyTemp = typeof value === 'function' ? value(opts) : value;
-
-    wirte(keyPath, keyTemp);
+        wirte(filePath, code);
+        break;
+      }
+    }
   });
-}
-
-function createModule(opts) {
-  const { routeTemp } = modules;
-  const { low } = opts;
-  const name = createModuleName(opts);
-
-  const dir = path.resolve(name);
-  const route = path.resolve(dir, `route.${low ? 'js' : 'jsx' }`);
-
-  fs.mkdirSync(`./${name}`);
-  fs.mkdirSync(`./${name}/pages`);
-  fs.mkdirSync(`./${name}/components`);
-
-  wirte(route, routeTemp(opts));
-}
-
-function createRedux(opts) {
-  const { actionsTemp, constantsTemp, reducersTemp, funcTemp } = redux;
-
-  const dir = path.resolve('redux');
-  const actions = path.resolve(dir, 'actions/index.js');
-  const constants = path.resolve(dir, 'constants/index.js');
-  const reducers = path.resolve(dir, 'reducers/index.js');
-  const func = path.resolve(dir, 'func.js');
-
-  fs.mkdirSync(`./redux`);
-  fs.mkdirSync(`./redux/actions`);
-  fs.mkdirSync(`./redux/constants`);
-  fs.mkdirSync(`./redux/reducers`);
-
-  wirte(actions, actionsTemp(opts));
-  wirte(constants, constantsTemp(opts));
-  wirte(reducers, reducersTemp(opts));
-  wirte(func, funcTemp(opts));
 }
 
 function run(name = '', parentName = '', cmd = {}) {
   const opts = getOpts(name, parentName, cmd);
 
-  if (opts.modules) {
-    return createModule(opts);
-  }
-
-  if (opts.redux) {
-    return createRedux(opts);
-  }
-
-  createComp(opts);
+  createComponent(opts);
 };
 
 program
   .name('create-react-file')
   .arguments('<name> [parentName]')
-  .option('-l, --low', 'React < 16.0 without PropTypes Or React-Router < 4.0')
   .option('-f, --function', 'create function component')
-  .option('-m, --modules', 'create modules')
-  .option('-p, --page', 'create page component')
-  .option('-r, --redux', 'create redux part')
-  .option('-h, --hooks', 'create hooks.js')
-  .option('-s, --single', 'only create Component.jsx')
+  .option('-p, --page', 'create component as page')
+  .option('-s, --single', 'create single file Component.jsx')
+  .option('-h, --hooks', 'create file hooks.js')
   .action(run)
-  .parse(process.argv); 
+  .parse(process.argv);

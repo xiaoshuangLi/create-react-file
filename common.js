@@ -1,3 +1,5 @@
+'use strict';
+
 const changeCase = require("change-case");
 
 const createModuleName = (opts) => {

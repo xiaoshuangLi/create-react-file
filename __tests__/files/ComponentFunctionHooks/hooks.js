@@ -1,8 +1,3 @@
-const common = require('../../common');
-
-const { createClassName } = common;
-
-module.exports = opts => `
 import {
   useRef,
   useMemo,
@@ -53,4 +48,3 @@ export const useThrottleCallback = (callback, ...args) => {
 
   return useCallback(throttle(fn, ...args), [fn]);
 };
-`;

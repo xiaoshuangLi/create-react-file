@@ -1,11 +1,11 @@
 {
   "name": "create-react-file",
-  "version": "1.1.28",
+  "version": "2.0.0",
   "description": "Use comman line to create component or something else",
   "main": "index.js",
   "bin": "index.js",
   "scripts": {
-    "test": "node ./index Test"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,11 @@
   "dependencies": {
     "change-case": "^3.0.1",
     "commander": "^2.11.0"
+  },
+  "devDependencies": {
+    "jest": "^26.1.0"
+  },
+  "jest": {
+    "testRegex": "(/__tests__/[^/]*|(\\.|/)(test|spec))\\.[jt]sx?$"
   }
 }

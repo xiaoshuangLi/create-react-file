@@ -1,4 +1,7 @@
-const common = require('../../common');
+'use strict';
+
+const path = require('path');
+const common = require(path.resolve(__dirname, '../common'));
 
 const { createComponentName } = common;
 

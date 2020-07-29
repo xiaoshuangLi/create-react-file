@@ -73,46 +73,15 @@ export default Component;
 
 ```sh
 $ create-react-file --help
-  Usage: create-file [options] <name> [parentName]
+  Usage: create-react-file [options] <name> [parentName]
 
   Options:
-
-    -l, --low       React < 16.0 without PropTypes Or React-Router < 4.0
-    -p, --function  create function component
-    -p, --page      create page component
-    -m, --modules   create modules
-    -r, --redux     create redux part
-    -s, --single    only create Component.jsx
+    -f, --function  create function component
+    -p, --page      create component as page
+    -s, --single    create single file Component.jsx
+    -h, --hooks     create file hooks.js
     -h, --help      output usage information
 ```
-
-## For arrow function in Class
-
-Arrow function maybe not so good as we thought.You should read [this](https://medium.com/@charpeni/arrow-functions-in-class-properties-might-not-be-as-great-as-we-think-3b3551c440b1) before use it.
-
-## For require in webpack
-
-Require will get different result with different version webpack.
-
-In webpack@^1.0.0:
-
-```js
-  const Comp = require('./Comp');
-  
-  console.log(Comp); // class Comp { ... }
-```
-
-In webpack@^2.0.0:
-
-```js
-  const Comp = require('./Comp');
-  
-  console.log(Comp); // { default: class Comp { ... } }
-```
-
-## For sass awesome ability
-
-If you're interested in Sass.You should read [this](https://gist.github.com/jslegers/9805919) something diffenent and awesome. 
 
 ## Simply command-line
 
