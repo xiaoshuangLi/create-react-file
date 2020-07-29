@@ -33,24 +33,6 @@ jobs:
       if: steps.cache-node_modules.outputs.cache-hit != 'true'
       run: npm ci
 
-  build:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [14.x]
-
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Restore cache from node_modules
-      uses: actions/cache@v2
-      with: 
-        path: node_modules
-        key: node_modules-${{ hashFiles('**/package-lock.json') }}
-
-    - run: npm run build --if-present
-
   test:
     runs-on: ubuntu-latest
 
