@@ -1,5 +1,5 @@
 # create-react-file
-Use comman line to create component or something else
+Use command line to create component or something else
 
 ## Installation
 
