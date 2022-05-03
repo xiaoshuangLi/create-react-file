@@ -159,3 +159,12 @@ test('create single page function', () => {
 
   expect(included).toBe(true);
 });
+
+test('create ant typescript component function', () => {
+  child_process.execSync(`node ${INDEX_PATH} AntComponentFunction -a`,{ cwd: RUNTIME_PATH });
+
+  const list = getFiles(RUNTIME_PATH);
+  const included = icludes(list);
+
+  expect(included).toBe(true);
+});
