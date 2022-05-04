@@ -16,8 +16,7 @@ const AntComponentFunction: FC<AntComponentFunctionProps> = (props) => {
     ...others
   } = props;
 
-  const cls = classnames({
-    [style.antComponentFunction]: true,
+  const cls = classnames(style.antComponentFunction, {
     [className]: !!className,
   });
 
