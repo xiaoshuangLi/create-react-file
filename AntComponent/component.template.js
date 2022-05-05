@@ -36,7 +36,8 @@ const ${componentName}: FC<${componentName}Props> = (props) => {
     ...others
   } = props;
 
-  const cls = classnames(style.${moduleName}, {
+  const cls = classnames({
+    [style.${moduleName}]: true,
     [className]: !!className,
   });
 
