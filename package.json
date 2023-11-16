@@ -1,6 +1,6 @@
 {
   "name": "create-react-file",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Use command line to create component or something else",
   "main": "index.js",
   "bin": "index.js",
