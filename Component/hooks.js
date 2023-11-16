@@ -39,15 +39,31 @@ export const useEventCallback = (fn) => {
   }, [ref]);
 };
 
-export const useDebounceCallback = (callback, ...args) => {
-  const fn = useEventCallback(callback);
+const useEventArgument = (arg) => {
+  const keys = Object.keys(arg);
+  const values = Object.values(arg);
 
-  return useCallback(debounce(fn, ...args), [fn]);
+  const objective = typeof arg === 'object';
+  const dependencies = objective ? [...keys, ...values] : [arg];
+
+  return useMemo(() => arg, dependencies);
+};
+
+const useEventArguments = (...args) => args.map(useEventArgument);
+
+export const useDebounceCallback = (callback, ...args) => {
+  args = useEventArguments(...args);
+  callback = useEventCallback(callback);
+  callback = useMemo(() => debounce(callback, ...args), args);
+
+  return useCallback(callback, [callback]);
 };
 
 export const useThrottleCallback = (callback, ...args) => {
-  const fn = useEventCallback(callback);
+  args = useEventArguments(...args);
+  callback = useEventCallback(callback);
+  callback = useMemo(() => throttle(callback, ...args), args);
 
-  return useCallback(throttle(fn, ...args), [fn]);
+  return useCallback(callback, [callback]);
 };
 `;
